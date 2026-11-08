@@ -1,0 +1,95 @@
+global:
+  environment: dev
+  springProfile: local
+
+postgres:
+  enabled: true
+  host: postgres
+  port: 5432
+  image:
+    repository: postgres
+    tag: 16-alpine
+    pullPolicy: IfNotPresent
+  credentials:
+    username: postgres
+    password: postgres
+  storage:
+    size: 1Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+productService:
+  replicaCount: 1
+  image:
+    repository: product-service
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 8082
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+orderService:
+  replicaCount: 1
+  image:
+    repository: order-service
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 8081
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+frontendService:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: frontend-service
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+# Local / Dev: API Gateway is enabled
+apiGateway:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: api-gateway
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 8080
+  service:
+    type: LoadBalancer
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Local / Dev: Ingress is disabled
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
