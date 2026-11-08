@@ -29,7 +29,7 @@ orderService:
   replicaCount: 1
   image:
     repository: 707360336863.dkr.ecr.us-east-1.amazonaws.com/order-service
-    tag: 20
+    tag: 21
     pullPolicy: IfNotPresent
   port: 8081
   resources:
