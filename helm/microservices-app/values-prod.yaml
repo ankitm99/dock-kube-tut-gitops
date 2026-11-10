@@ -14,7 +14,7 @@ productService:
   replicaCount: 1
   image:
     repository: 707360336863.dkr.ecr.us-east-1.amazonaws.com/product-service
-    tag: 3
+    tag: 4
     pullPolicy: IfNotPresent
   port: 8082
   resources:
