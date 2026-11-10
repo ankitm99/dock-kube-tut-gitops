@@ -46,7 +46,7 @@ frontendService:
   replicaCount: 1
   image:
     repository: 707360336863.dkr.ecr.us-east-1.amazonaws.com/frontend-service
-    tag: 4
+    tag: 5
     pullPolicy: IfNotPresent
   port: 80
   resources:
