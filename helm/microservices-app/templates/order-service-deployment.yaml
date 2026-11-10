@@ -31,9 +31,23 @@ spec:
             - name: SPRING_DATASOURCE_DRIVER
               value: "org.postgresql.Driver"
             - name: SPRING_DATASOURCE_USERNAME
+              {{ if .Values.postgres.credentials.secretName }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.credentials.secretName | quote }}
+                  key: {{ .Values.postgres.credentials.usernameKey | quote }}
+              {{ else }}
               value: {{ .Values.postgres.credentials.username | quote }}
+              {{ end }}
             - name: SPRING_DATASOURCE_PASSWORD
+              {{ if .Values.postgres.credentials.secretName }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.credentials.secretName | quote }}
+                  key: {{ .Values.postgres.credentials.passwordKey | quote }}
+              {{ else }}
               value: {{ .Values.postgres.credentials.password | quote }}
+              {{ end }}
           resources:
             {{- toYaml .Values.orderService.resources | nindent 12 }}
           livenessProbe:

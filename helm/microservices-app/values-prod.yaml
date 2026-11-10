@@ -7,8 +7,9 @@ postgres:
   host: dock-kube-tut-postgres.c8tse06k0g4i.us-east-1.rds.amazonaws.com
   port: 5432
   credentials:
-    username: postgres
-    password: postgres
+    secretName: rds-credentials
+    usernameKey: username
+    passwordKey: password
 
 productService:
   replicaCount: 1
